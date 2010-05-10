@@ -50,10 +50,6 @@ create_frmFoablak (void)
   gtk_container_add (GTK_CONTAINER (frmFoablak), vbox1);
 
   lblFoablak = gtk_label_new (_("Ez is valtozni fog"));
-  /***/
-  //bar nem szep, de itt is csinalunk egy hozzarendelest a foablak es a foablak cimkeje kozott, hogy kesobb is el tudjuk erni (foablak --> foablak cimkeje):
-  gtk_object_set_data (GTK_OBJECT(frmFoablak), "fo-cimke", lblFoablak);
-  /***/
   gtk_widget_show (lblFoablak);
   gtk_box_pack_start (GTK_BOX (vbox1), lblFoablak, FALSE, FALSE, 0);
   gtk_label_set_justify (GTK_LABEL (lblFoablak), GTK_JUSTIFY_LEFT);
@@ -150,10 +146,6 @@ create_frmMellekablak (void)
   gtk_container_add (GTK_CONTAINER (frmMellekablak), vbox2);
 
   lblMellekablak = gtk_label_new (_("Ez is valtozni fog..."));
-  /***/
-  //bar nem szep, de itt is csinalunk egy hozzarendelest a mellekablak es a mellekablak cimkeje kozott, hogy kesobb is el tudjuk erni (mellekablak --> mellekablak cimkeje):
-  gtk_object_set_data (GTK_OBJECT(frmMellekablak), "mellek-cimke", lblMellekablak);
-  /***/
   gtk_widget_show (lblMellekablak);
   gtk_box_pack_start (GTK_BOX (vbox2), lblMellekablak, TRUE, TRUE, 0);
   gtk_label_set_justify (GTK_LABEL (lblMellekablak), GTK_JUSTIFY_LEFT);
@@ -235,3 +227,4 @@ create_frmAbout (void)
 
   return frmAbout;
 }
+
