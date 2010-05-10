@@ -1,31 +1,31 @@
 ## Process this file with automake to produce Makefile.in
-## Created by Anjuta - will be overwritten
-## If you don't want it to overwrite it,
-## 	Please disable it in the Anjuta project configuration
+## Created by Anjuta
 
-SUBDIRS = intl po macros src
+SUBDIRS = src po
 
-lookupdocdir = ${prefix}/doc/lookup
-lookupdoc_DATA = \
+gtk_lookup_testdocdir = ${prefix}/doc/gtk_lookup_test
+gtk_lookup_testdoc_DATA = \
 	README\
 	COPYING\
 	AUTHORS\
 	ChangeLog\
 	INSTALL\
-	NEWS\
-	TODO\
-	ABOUT-NLS
+	NEWS
 
-EXTRA_DIST = $(lookupdoc_DATA)
 
-gnomemenudir = $(prefix)/@NO_PREFIX_PACKAGE_MENU_DIR@/Applications
-gnomemenu_DATA = lookup.desktop
+INTLTOOL_FILES = intltool-extract.in \
+	intltool-merge.in \
+	intltool-update.in
 
-# Copy all the spec files. Of cource, only one is actually used.
-dist-hook:
-	for specfile in *.spec; do \
-		if test -f $$specfile; then \
-			cp -p $$specfile $(distdir); \
-		fi \
-	done
+EXTRA_DIST = $(gtk_lookup_testdoc_DATA) \
+	$(INTLTOOL_FILES)
 
+DISTCLEANFILES = intltool-extract \
+	intltool-merge \
+	intltool-update \
+	po/.intltool-merge-cache
+
+
+# Remove doc directory on uninstall
+uninstall-local:
+	-rm -r $(gtk_lookup_testdocdir)

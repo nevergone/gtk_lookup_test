@@ -1,30 +1,29 @@
 ## Process this file with automake to produce Makefile.in
 
-## Created by Anjuta - will be overwritten
-## If you don't want it to overwrite it,
-## 	Please disable it in the Anjuta project configuration
+## Created by Anjuta
 
-INCLUDES = \
-	$(GNOME_CFLAGS)
+AM_CPPFLAGS = \
+	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
+	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
+	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
+	$(gtk_lookup_test_CFLAGS)
 
-lookup_CFLAGS =\
+AM_CFLAGS =\
 	 -Wall\
-	 -O1\
 	 -g
 
-bin_PROGRAMS = lookup
+bin_PROGRAMS = gtk_lookup_test
 
-lookup_SOURCES = \
-	support.h\
-	support.c\
-	main.c\
-	interface.h\
-	interface.c\
-	callbacks.h\
-	callbacks.c
+gtk_lookup_test_SOURCES = \
+	callbacks.c \
+	callbacks.h \
+	main.c \
+	interface.c \
+	interface.h \
+	support.c \
+	support.h
 
-lookup_LDFLAGS = 
+gtk_lookup_test_LDFLAGS = \
+	-Wl,--export-dynamic
 
-lookup_LDADD =  \
-	$(GNOME_LIBS)
-
+gtk_lookup_test_LDADD = $(gtk_lookup_test_LIBS)

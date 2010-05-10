@@ -12,12 +12,12 @@
 #include <string.h>
 #include <stdio.h>
 
-#include <bonobo.h>
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #include "callbacks.h"
 #include "interface.h"
 #include "support.h"
+
 
 #define GLADE_HOOKUP_OBJECT(component,widget,name) \
   g_object_set_data_full (G_OBJECT (component), name, \
@@ -83,7 +83,7 @@ create_frmFoablak (void)
   gtk_widget_show (btnOpen);
   gtk_box_pack_start (GTK_BOX (hbox2), btnOpen, TRUE, TRUE, 0);
 
-  btnAbout = gtk_button_new_from_stock ("gnome-stock-about");
+  btnAbout = gtk_button_new_from_stock ("gtk-about");
   gtk_widget_show (btnAbout);
   gtk_box_pack_start (GTK_BOX (hbox2), btnAbout, TRUE, TRUE, 0);
 
@@ -214,14 +214,15 @@ create_frmAbout (void)
 
   if (!strcmp (translators, "translator_credits"))
     translators = NULL;
-  frmAbout = gnome_about_new ("lookup", VERSION,
-                        _("GPL"),
-                        "",
-                        authors,
-                        documenters,
-                        translators,
-                        NULL);
-
+  frmAbout = gtk_about_dialog_new ();
+  gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG(frmAbout), "lookup");
+  gtk_about_dialog_set_version (GTK_ABOUT_DIALOG(frmAbout), VERSION);
+  gtk_about_dialog_set_copyright (GTK_ABOUT_DIALOG(frmAbout), _("GPL"));
+  gtk_about_dialog_set_comments (GTK_ABOUT_DIALOG(frmAbout), "");
+  gtk_about_dialog_set_authors (GTK_ABOUT_DIALOG(frmAbout), authors);
+  gtk_about_dialog_set_documenters (GTK_ABOUT_DIALOG(frmAbout), documenters);
+  gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG(frmAbout), translators);
+  gtk_about_dialog_set_logo (GTK_ABOUT_DIALOG(frmAbout), NULL);
   /* Store pointers to all widgets, for use by lookup_widget(). */
   GLADE_HOOKUP_OBJECT_NO_REF (frmAbout, frmAbout, "frmAbout");
 
